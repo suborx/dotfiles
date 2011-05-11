@@ -7,15 +7,12 @@ syntax on                   " syntax highlighing
 filetype on                 " try to detect filetypes
 filetype plugin indent on   " enable loading indent file for filetype
 
-" source
-set statusline=%F%m%r%h%w\ [POS=%04l,%04v][%p%%]\ [LEN=%L]\ %{fugitive#statusline()}
-
 set number                  " show line numbers
 set showmode                " show actual mode
 set title                   " terminal title
 set t_Co=256                " terminal in 256 colors
 set ruler                   " show the cursor position all the time
-set laststatus=2            " status bar
+"set laststatus=2            " status bar
 set showmatch               " Pri zápise otvárajúcej/zatvárajúcej zátvorky, ukáž jej párovú zátvorku
 
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
@@ -47,7 +44,6 @@ set ignorecase         " ignore case when searching
 set smartcase          " if searching and search contains upper case, make case sensitive search
 
 nmap <silent> <C-N> :silent noh<CR>
-
 
 " MAPING ********************************************************************
 let mapleader = ","
@@ -146,6 +142,13 @@ endif
 
 " PLUGINS ***************************************************************
 
+"ZoomWin
+map <Leader><Leader> :ZoomWin<CR>
+" Without setting this, ZoomWin restores windows in a way that causes
+" equalalways behavior to be triggered the next time CommandT is used.
+" This is likely a bludgeon to solve some other issue, but it works
+set noequalalways
+
 "NERDTree
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 map <Leader>n :NERDTreeToggle<CR>
@@ -155,17 +158,10 @@ let g:CommandTMaxHeight=20
 
 " Syntastic
 let g:syntastic_auto_loc_list=1
-set statusline=%F%m%r%h%w\ [POS=%04l,%04v][%p%%]\ [LEN=%L]\ %{fugitive#statusline()}
+"set statusline=%F%m%r%h%w\ [POS=%04l,%04v][%p%%]\ [LEN=%L]\ %{fugitive#statusline()} "Error
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-"ZoomWin
-map <Leader><Leader> :ZoomWin<CR>
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
 
 
 " GUI options ************************************************************
