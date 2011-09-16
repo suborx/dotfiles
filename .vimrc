@@ -1,4 +1,4 @@
-" BABIC SETTINGS ***********************************************************
+" BASIC SETTINGS ***********************************************************
 set nocompatible            " use vim defaults
 set encoding=utf-8          " set encoding
 set noswapfile
@@ -8,9 +8,10 @@ filetype on                 " try to detect filetypes
 filetype plugin indent on   " enable loading indent file for filetype
 
 set number                  " show line numbers
+set cursorline              " show current line
 set showmode                " show actual mode
 set title                   " terminal title
-set t_Co=256                " terminal in 256 colors
+set t_Co=256                " terminal in 256 set cursorline
 set ruler                   " show the cursor position all the time
 "set laststatus=2            " status bar
 set showmatch               " Pri zápise otvárajúcej/zatvárajúcej zátvorky, ukáž jej párovú zátvorku
@@ -177,6 +178,16 @@ if has('gui_running')
   set guioptions-=B
 endif
 
+if &term =~ "xterm\\|rxvt"
+  " use an orange cursor in insert mode
+  let &t_SI = "\<Esc>]12;orange\x7"
+  " use a red cursor otherwise
+  let &t_EI = "\<Esc>]12;red\x7"
+  silent !echo -ne "\033]12;red\007"
+  " reset cursor when vim exits
+  autocmd VimLeave * silent !echo -ne "\033]112\007"
+  "use \003]12;gray\007 for gnome-terminal
+endif
 
 " FONTS *******************************************************************
 set gfn=Bitstream\ Vera\ Sans\ Mono\ 9
@@ -187,7 +198,9 @@ set encoding=utf8
 
 " COLORS ******************************************************************
 "colorscheme railscasts+
-colorscheme ir_black
-"colorscheme jellybeans+
+"colorscheme ir_black
+colorscheme jellybeans+
 "colorscheme molokai
 "colorscheme vwilight
+"
+"
